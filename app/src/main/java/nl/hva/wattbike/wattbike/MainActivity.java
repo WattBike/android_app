@@ -2,43 +2,31 @@ package nl.hva.wattbike.wattbike;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 
 public class MainActivity extends ActionBarActivity {
-    private String UUID, bpm;
     TextView resultView;
     EditText inputText;
+    private String UUID, bpm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +36,6 @@ public class MainActivity extends ActionBarActivity {
         bpm = "12";
         setContentView(R.layout.activity_main);
         findViewsbyId();
-    }
-
-    private void findViewsbyId() {
-        resultView = (TextView)findViewById(R.id.textResult);
-        inputText = (EditText)findViewById(R.id.editText);
     }
 
 
@@ -72,10 +55,31 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            onCreateSettings();
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Set variables for cross class editing
+     */
+    private void findViewsbyId() {
+        resultView = (TextView) findViewById(R.id.textResult);
+        inputText = (EditText) findViewById(R.id.editText);
+    }
+
+    /**
+     * What happens when you go to settings
+     */
+    protected void onCreateSettings() {
+        setContentView(R.layout.activity_settings);
+    }
+
+    /**
+     * What happens when you press the button in main.
+     *
+     * @param view Given by the system
+     */
     public void sendRate(View view) {
         resultView.setText("...");
         resultView.setVisibility(View.GONE);
@@ -87,10 +91,27 @@ public class MainActivity extends ActionBarActivity {
         t.execute(url);
     }
 
+    /**
+     * @param view Given by the system
+     */
+    public void queryLogin(View view) {
+
+    }
+
+
+    /**
+     * Download files from the main thread with this.
+     *
+     * @see android.os.AsyncTask
+     */
     private class DownloadFilesTask extends AsyncTask<String, Integer, String> {
-        // Do the long-running work in here
+        /**
+         * Executed in background. Called by .execute(<String>)
+         *
+         * @param urls the urls you want to query
+         * @return Output of the query
+         */
         protected String doInBackground(String... urls) {
-            int count = urls.length;
             String output = null;
             for (String url : urls) {
                 output = getOutputFromUrl(url);
@@ -98,13 +119,19 @@ public class MainActivity extends ActionBarActivity {
             return output;
         }
 
+
+        /**
+         * Code to read the response of the server
+         * @param url the URL its gonna call
+         * @return the response in string format
+         */
         private String getOutputFromUrl(String url) {
-            StringBuffer output = new StringBuffer("");
+            StringBuilder output = new StringBuilder("");
             try {
                 InputStream stream = getHttpConnection(url);
                 BufferedReader buffer = new BufferedReader(
                         new InputStreamReader(stream));
-                String s = "";
+                String s;
                 while ((s = buffer.readLine()) != null)
                     output.append(s);
             } catch (IOException e1) {
@@ -113,6 +140,13 @@ public class MainActivity extends ActionBarActivity {
             return output.toString();
         }
 
+
+        /**
+         * Code to query the server, only called by getOutputFromUrl()
+         * @param urlString the URL to query
+         * @return bytestream version of the response
+         * @throws IOException
+         */
         private InputStream getHttpConnection(String urlString)
                 throws IOException {
             InputStream stream = null;
