@@ -8,4 +8,7 @@
     <string name="button_login">Login</string>
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
+    <string name="title_activity_login">Login</string>
+    <string name="saved_email">Saved Email</string>
+    <string name="saved_email_default">admin@hva.nl</string>
 </resources>

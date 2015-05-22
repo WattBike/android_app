@@ -1,6 +1,7 @@
 package nl.hva.wattbike.wattbike;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -111,6 +112,7 @@ public class LoginTask extends AsyncTask<String, Integer, String> {
             String status = object.getString("status");
             resultView.setText(status);
         } catch (JSONException e) {
+            Log.i("failure", result);
             resultView.setText(result);
         }
 
