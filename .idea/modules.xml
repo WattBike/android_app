@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///run/media/smillernl/Backup/apps/WattBike/WattBike.iml" filepath="/run/media/smillernl/Backup/apps/WattBike/WattBike.iml" />
-      <module fileurl="file:///run/media/smillernl/Backup/apps/WattBike/app/app.iml" filepath="/run/media/smillernl/Backup/apps/WattBike/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_app.iml" filepath="$PROJECT_DIR$/android_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-

@@ -11,4 +11,12 @@
     <string name="title_activity_login">Login</string>
     <string name="saved_email">Saved Email</string>
     <string name="saved_email_default">admin@hva.nl</string>
+    <string name="action_home">Home</string>
+    <string name="logged_in">Logged in</string>
+    <string name="menu_logout">Logout</string>
+    <string name="bluetooth_on">Turn on</string>
+    <string name="bluetooth_off">Turn off</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="bluetooth_list">List devices</string>
+    <string name="bluetooth_find">Scan</string>
 </resources>

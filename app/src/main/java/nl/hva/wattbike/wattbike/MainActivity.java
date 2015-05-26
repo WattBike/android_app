@@ -23,20 +23,17 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        String defaultValue = getResources().getString(R.string.saved_email_default);
-        String email = sharedPref.getString(getString(R.string.saved_email), defaultValue);
-        if (email != null) {
-            if (email.equals(defaultValue)) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            } else {
-                TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                UUID = tManager.getDeviceId();
-                bpm = "12";
-                setContentView(R.layout.activity_main);
-                findViewsbyId();
-                inputText.findFocus();
-            }
+        boolean loggedIn = sharedPref.getBoolean(getString(R.string.logged_in), false);
+        setContentView(R.layout.activity_main);
+        findViewsbyId();
+        inputText.findFocus();
+        if (loggedIn) {
+            TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            UUID = tManager.getDeviceId();
+            bpm = "-1";
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -44,8 +41,26 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        boolean loggedIn = sharedPref.getBoolean(getString(R.string.logged_in), false);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (loggedIn) {
+            menu.removeItem(R.id.action_login);
+        }
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        UUID = tManager.getDeviceId();
+        bpm = "-1";
     }
 
     @Override
@@ -56,10 +71,17 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+        Intent i = null;
+        switch (id) {
+            case R.id.action_settings:
+                i = new Intent(this, SettingsActivity.class);
+                break;
+            case R.id.action_login:
+                i = new Intent(this, LoginActivity.class);
+                i.putExtra("logout", item.getTitle().equals(getString(R.string.menu_logout)));
+                break;
         }
+        startActivity(i);
         return super.onOptionsItemSelected(item);
     }
 
@@ -88,7 +110,6 @@ public class MainActivity extends ActionBarActivity {
         t.setResultView(resultView);
         t.execute(url);
     }
-
 
 
 }

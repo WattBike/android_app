@@ -17,8 +17,8 @@ import java.net.URLConnection;
 
 /**
  * @author Sean Molenaar
- * @since 1-5-15
  * @version 0.0.0.1
+ * @since 1-5-15
  */
 
 /**
