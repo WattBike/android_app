@@ -1,4 +1,4 @@
-package nl.hva.wattbike.wattbike;
+package nl.hva.wattbike.wattbike.UI;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import nl.hva.wattbike.wattbike.R;
 
 
 public class LoginActivity extends ActionBarActivity {

@@ -1,4 +1,4 @@
-package nl.hva.wattbike.wattbike;
+package nl.hva.wattbike.wattbike.UI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import nl.hva.wattbike.wattbike.HeartBeatTask;
+import nl.hva.wattbike.wattbike.R;
 
 
 public class MainActivity extends ActionBarActivity {

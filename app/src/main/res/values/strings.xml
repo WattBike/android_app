@@ -19,4 +19,5 @@
     <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_list">List devices</string>
     <string name="bluetooth_find">Scan</string>
+    <string name="ble_not_supported">Bluetooth Low Energy is not supported on this device</string>
 </resources>
