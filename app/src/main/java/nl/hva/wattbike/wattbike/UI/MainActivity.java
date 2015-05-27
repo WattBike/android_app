@@ -77,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
         Intent i = null;
         switch (id) {
             case R.id.action_settings:
-                i = new Intent(this, SettingsActivity.class);
+                i = new Intent(this, DeviceScanActivity.class);
                 break;
             case R.id.action_login:
                 i = new Intent(this, LoginActivity.class);

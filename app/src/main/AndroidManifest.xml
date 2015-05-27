@@ -24,7 +24,10 @@
             android:name=".UI.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".UI.SettingsActivity"
+            android:name=".UI.DeviceScanActivity"
+            android:label="@string/action_settings" />
+        <activity
+            android:name=".DeviceControlActivity"
             android:label="@string/action_settings" />
     </application>
 
